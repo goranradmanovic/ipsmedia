@@ -1,0 +1,55 @@
+.thankyou
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100dvw
+    height: 100dvh
+    font-family: 'Montserrat'
+    font-style: normal
+    font-weight: 400
+
+    .thankyou__wrapper
+        width: 318px
+        text-align: center
+        color: $white
+
+        .thankyou__title
+            font-size: 32px
+            line-height: 48px
+
+        .thankyou__text
+            font-size: 18px
+            line-height: 26px
+
+        .thankyou__btn
+            display: flex
+            align-items: center
+            width: 318px
+            height: 48px
+            margin-top: 16px
+            padding: 16px 18px
+            position: relative
+            box-sizing: border-box
+            background: $gradient-20
+            background-clip: padding-box
+            border: solid 1px transparent
+            border-radius: 6px
+            cursor: pointer
+            
+            &:before
+                content: ''
+                position: absolute
+                top: 0 
+                right: 0 
+                bottom: 0 
+                left: 0
+                z-index: -1
+                margin: -1px
+                border-radius: inherit
+                background: $gradient
+
+            .thankyou__btn_text
+                font-family: 'Open Sans'
+                font-weight: 600
+                font-size: 16px
+                line-height: 16px
