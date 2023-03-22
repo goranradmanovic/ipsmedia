@@ -7,17 +7,14 @@
         align-content: center
         height: 100dvh
 
-        .main__section
+        .main__section, .main__slider
             display: flex
             flex-direction: column
             justify-content: center
             align-items: center
             width: 50%
-        
-        .main__slider
-            width: 50%
 
-@media only screen and (min-width: 320px) and (max-width: 425px)
+@media only screen and (min-width: 320px) and (max-width: 768px)
     .container
         padding: 60px 20px 20px
 
@@ -25,9 +22,9 @@
             flex-direction: column
             justify-content: flex-start
 
-            .main__section
+            .main__section, .main__slider
                 width: 100%
                 margin-bottom: 30px
-            
+
             .main__slider
-                width: 100%
+                padding-bottom: 60px

@@ -1,0 +1,115 @@
+.slider
+    position: relative
+    width: 400px
+    height: 700px
+    background-image: -webkit-image-set(url(@/assets/img/phone/iPhone-mokup.png) 1x, url(@/assets/img/phone/iPhone-mokup@2x.png) 2x,url(@/assets/img/phone/iPhone-mokup@3x.png) 3x),
+    background-image: image-set(url(@/assets/img/phone/iPhone-mokup.png) 1x, url(@/assets/img/phone/iPhone-mokup@2x.png) 2x,url(@/assets/img/phone/iPhone-mokup@3x.png) 3x)
+    background-position: center
+    background-repeat: no-repeat
+
+    &::before
+        content: ''
+        position: absolute
+        z-index: -1
+        width: 400px
+        height: 700px
+        background-image: var(--ambient-bg)
+        background-position: center
+        background-repeat: no-repeat
+        filter: blur(70px)
+        transition: background-image 400ms ease-in
+
+    &::after
+        content: ''
+        width: 128px
+        height: 34px
+        position: absolute
+        top: 70%
+        left: calc(50% - 64px)
+        background-image: url(@/assets/icons/phone-zoom.svg)
+        background-position: center
+        background-repeat: no-repeat
+
+    .slider__main
+        width: 308px
+        height: 416px
+        position: absolute
+        top: 16.9%
+        left: calc(50% - 154px)
+        background-color: $black
+
+        .slider__main__picture, .slider__main__picture > .slider__main__img
+            display: block
+            width: 308px
+            height: 416px
+
+    .slider__thumb
+        width: 42px
+        height: 42px
+        position: absolute
+        top: 83.3%
+        left: 58px
+        background-color: $black
+
+        .slider__thumb__picture, .slider__thumb__picture > .slider__thumb__img
+            display: block
+            height: 42px
+
+    .slider__btn
+        position: absolute
+        top: 82.9%
+        left: calc(50% - 24px)
+        width: 48px
+        height: 48px
+        margin: 0
+        border-radius: 50%
+        border: none
+        border-style: none
+        cursor: pointer
+        background-color: transparent
+
+        &:active
+            border: none
+            border-style: none
+
+    .slider__pagination
+        position: absolute
+        top: 104%
+        left: calc(50% - 125px)
+        display: flex
+        align-items: center
+        justify-content: space-between
+        width: 250px
+        height: 10px
+        padding: 2px
+
+        .slider__pagination__item
+            position: relative
+            width: 55px
+            height: 2px
+            border-radius: 1px
+            background-color: $light-gray
+            
+            & .slider__pagination__item__progress
+                position: absolute
+                display: inline-block
+                width: 0
+                height: 2px
+                background-color: $white
+
+                &.active
+                   animation: progress 7.5s linear
+
+// Progress bar animation
+@keyframes progress
+    from 
+        width: 0%
+    to
+        width: 100%
+
+// Animations fadein/fadeout
+.v-enter-active, .v-leave-active
+  transition: opacity 400ms ease
+
+.v-enter-from, .v-leave-to 
+  opacity: 0
