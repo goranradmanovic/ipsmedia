@@ -18,15 +18,17 @@
     </div>
 
     <div class="slider__thumb">
-      <picture class="slider__thumb__picture">
-        <source :srcset="imgSet[currentIndex || 0].thumbSrcset" type="image/jpg" />
-        <img
-          :srcset="imgSet[currentIndex || 0].thumbSrcset"
-          type="image/jpg"
-          alt="Carousel image"
-          class="slider__thumb__img"
-        />
-      </picture>
+      <Transition name="thumb-fade">
+        <picture v-show="loaded" class="slider__thumb__picture">
+          <source :srcset="imgSet[currentIndex || 0].thumbSrcset" type="image/jpg" />
+          <img
+            :srcset="imgSet[currentIndex || 0].thumbSrcset"
+            type="image/jpg"
+            alt="Carousel image"
+            class="slider__thumb__img"
+          />
+        </picture>
+      </Transition>
     </div>
 
     <button @click="changeImg()" class="slider__btn" />
@@ -91,37 +93,33 @@ const imgSet = reactive([
 ])
 
 const currentIndex = ref(null),
-  loaded = ref(true),
-  startAutoPlay = ref(false)
+  loaded = ref(true)
+
+let autoPlayTimeout = null
 
 const changeImg = () => {
   loaded.value = false
-  startAutoPlay.value = true
+  
+  // Increas slider index and show fade in/fade out animation
+  setTimeout(() => {
+    loaded.value = !loaded.value
+    currentIndex.value === imgSet.length - 1 ? stopAutoPlay() : currentIndex.value += 1
+  }, 400)
 
-  if (currentIndex.value === imgSet.length - 1) {
-    // Start slider loop and return to first image, start of the slide
-    startAutoPlay.value = false
-    setTimeout(() => {
-      loaded.value = !loaded.value
-      currentIndex.value = 0
-    }, 400)
-  } else {
-    // Increas slider index and show fade in/fade out animation
-    setTimeout(() => {
-      loaded.value = !loaded.value
-      currentIndex.value += 1
-    }, 400)
-  }
+  // Start of the slider
+  startAutoPlay()
+}
 
-  let autoPlayTimeout = null
-  if (startAutoPlay.value) {
-    // Start the slider and loop every 8 sec
-    autoPlayTimeout = setTimeout(() => {
-      changeImg()
-    }, 8000)
-  } else {
-    // After iteration through all images, stop the slider
-    clearTimeout(autoPlayTimeout)
-  }
+// Start the slider and loop every 8 sec
+const startAutoPlay = () => {
+  autoPlayTimeout = setTimeout(() => {
+    changeImg()
+  }, 8000)
+}
+
+// After iteration through all images, stop the slider
+const stopAutoPlay = () => {
+  clearTimeout(autoPlayTimeout)
+  currentIndex.value = 0
 }
 </script>
