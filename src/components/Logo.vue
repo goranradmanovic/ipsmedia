@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <div class="logo">
     <img alt="IPS logo" src="@/assets/icons/ips-logo.svg" />
-  </header>
+  </div>
 </template>
